@@ -1,0 +1,73 @@
+documents:
+
+  "9789241515702-eng.pdf":
+    source: WHO
+    document_type: Guideline
+    title: Classification of Diabetes Mellitus
+    year: 2019
+    publisher: World Health Organization
+    reliability_score: 1.00
+
+  "dc24S002.pdf":
+    source: ADA
+    document_type: Clinical Guideline
+    title: Standards of Care in Diabetes 2024
+    year: 2024
+    publisher: American Diabetes Association
+    reliability_score: 0.99
+
+  "dc250014.pdf":
+    source: ADA
+    document_type: Research Paper
+    title: Diabetes Prevention Program Outcomes Study
+    year: 2025
+    publisher: Diabetes Care
+    reliability_score: 0.98
+
+  "bmjmed-2022-000372.pdf":
+    source: BMJ
+    document_type: Review Article
+    title: Advances in the Management of Type 2 Diabetes in Adults
+    year: 2023
+    publisher: BMJ Medicine
+    reliability_score: 0.97
+
+  "Breaking_Barriers_CDC_and_American_Diabetes_Associ.pdf":
+    source: CDC
+    document_type: Public Health Article
+    title: Breaking Barriers - CDC and ADA Unite to Combat Diabetes
+    year: 2025
+    publisher: CDC
+    reliability_score: 0.96
+
+  "ICMR_GuidelinesType2diabetes2018_0.pdf":
+    source: ICMR
+    document_type: National Guideline
+    title: ICMR Guidelines for Management of Type 2 Diabetes
+    year: 2018
+    publisher: Indian Council of Medical Research
+    reliability_score: 0.98
+
+  "BTN_D1_Diabetes Management guidelines.pdf":
+    source: Ministry of Health Bhutan
+    document_type: Clinical Handbook
+    title: Managing Diabetes Mellitus - Guide for Health Workers
+    year: 2007
+    publisher: Ministry of Health Bhutan
+    reliability_score: 0.92
+
+  "DIA_Index_V2.pdf":
+    source: NIDDK
+    document_type: Textbook
+    title: Diabetes in America (3rd Edition)
+    year: 2018
+    publisher: National Institute of Diabetes and Digestive and Kidney Diseases
+    reliability_score: 0.98
+
+  "Textbook of Diabetes - Richard Holt.pdf":
+    source: Wiley
+    document_type: Medical Textbook
+    title: Textbook of Diabetes
+    year: 2021
+    publisher: Wiley Blackwell
+    reliability_score: 0.99

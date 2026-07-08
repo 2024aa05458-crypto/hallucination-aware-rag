@@ -1,17 +1,33 @@
 from src.ingestion.pdf_loader import PDFLoader
 
-loader = PDFLoader(
-    "data/raw"
-)
+loader = PDFLoader("data/raw")
 
 documents = loader.load_documents()
 
-print(f"Documents Loaded : {len(documents)}")
+print(f"\nTotal Documents Loaded : {len(documents)}\n")
 
-for doc in documents:
+for document in documents:
 
-    print("-" * 50)
+    print("=" * 80)
 
-    print(doc["file_name"])
+    print(f"Document ID       : {document['document_id']}")
 
-    print(len(doc["text"]))
+    print(f"File Name         : {document['file_name']}")
+
+    print(f"Title             : {document['title']}")
+
+    print(f"Source            : {document['source']}")
+
+    print(f"Document Type     : {document['document_type']}")
+
+    print(f"Publisher         : {document['publisher']}")
+
+    print(f"Publication Year  : {document['year']}")
+
+    print(f"Reliability Score : {document['reliability_score']}")
+
+    print(f"Pages             : {document['total_pages']}")
+
+    print(f"Characters        : {len(document['text'])}")
+
+    print("=" * 80)
