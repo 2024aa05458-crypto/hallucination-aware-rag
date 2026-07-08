@@ -1,0 +1,12 @@
+pypdf
+sentence-transformers
+faiss-cpu
+transformers
+torch
+langchain-text-splitters
+pyyaml
+fastapi
+uvicorn
+python-dotenv
+numpy
+pandas
