@@ -1,0 +1,27 @@
+project:
+  name: Hallucination-Aware-RAG
+  version: 1.0
+
+dataset:
+  raw_data_path: data/raw
+  processed_data_path: data/processed
+
+chunking:
+  chunk_size: 500
+  chunk_overlap: 100
+
+embedding:
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  embedding_dimension: 384
+
+vector_db:
+  index_path: vector_db/diabetes_faiss.index
+  top_k: 3
+
+llm:
+  model_name: google/flan-t5-small
+  max_new_tokens: 150
+  temperature: 0.2
+
+logging:
+  log_directory: logs
