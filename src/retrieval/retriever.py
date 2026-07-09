@@ -52,9 +52,17 @@ class Retriever:
 
             semantic_score = 1 / (1 + float(distance))
 
+            current_year = 2026
+
+            age = max(current_year - chunk["year"], 0) if chunk["year"] else 10
+
+            recency_score = max(0.70, 1 - (age * 0.02))
+
             combined_score = (
-                semantic_score * 0.7
-                + chunk["reliability_score"] * 0.3
+                semantic_score * 0.50
+                + chunk["reliability_score"] * 0.20
+                + chunk["type_weight"] * 0.20
+                + recency_score * 0.10
             )
 
             retrieved_chunks.append(
@@ -80,6 +88,10 @@ class Retriever:
                     "chunk": chunk["text"],
 
                     "distance": float(distance),
+
+                    "type_weight": chunk["type_weight"],
+
+                    "recency_score": round(recency_score,4),
 
                     "semantic_score": round(
                         semantic_score,

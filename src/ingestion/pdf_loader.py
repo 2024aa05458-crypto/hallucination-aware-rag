@@ -50,16 +50,19 @@ class PDFLoader:
                 cleaned_text = TextCleaner.clean(text)
 
                 metadata = self.document_metadata.get(
-                    pdf.name,
-                    {
-                        "source": "Unknown",
-                        "document_type": "Unknown",
-                        "title": pdf.stem,
-                        "publisher": "Unknown",
-                        "year": None,
-                        "reliability_score": 0.80
-                    }
-                )
+                pdf.name,
+                {
+                    "source": "Unknown",
+                    "document_type": "Unknown",
+                    "title": pdf.stem,
+                    "publisher": "Unknown",
+                    "year": None,
+                    "reliability_score": 0.80,
+                    "type_weight": 0.80
+                }
+            )
+
+                
 
                 document = {
 
@@ -82,6 +85,8 @@ class PDFLoader:
                     "year": metadata["year"],
 
                     "reliability_score": metadata["reliability_score"],
+
+                    "type_weight": metadata["type_weight"],
 
                     "text": cleaned_text
 

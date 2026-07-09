@@ -7,6 +7,7 @@ documents:
     year: 2019
     publisher: World Health Organization
     reliability_score: 1.00
+    type_weight: 1.00
 
   "dc24S002.pdf":
     source: ADA
@@ -15,6 +16,7 @@ documents:
     year: 2024
     publisher: American Diabetes Association
     reliability_score: 0.99
+    type_weight: 1.00
 
   "dc250014.pdf":
     source: ADA
@@ -23,6 +25,7 @@ documents:
     year: 2025
     publisher: Diabetes Care
     reliability_score: 0.98
+    type_weight: 0.94
 
   "bmjmed-2022-000372.pdf":
     source: BMJ
@@ -31,6 +34,7 @@ documents:
     year: 2023
     publisher: BMJ Medicine
     reliability_score: 0.97
+    type_weight: 0.92
 
   "Breaking_Barriers_CDC_and_American_Diabetes_Associ.pdf":
     source: CDC
@@ -39,6 +43,7 @@ documents:
     year: 2025
     publisher: CDC
     reliability_score: 0.96
+    type_weight: 0.90
 
   "ICMR_GuidelinesType2diabetes2018_0.pdf":
     source: ICMR
@@ -47,6 +52,7 @@ documents:
     year: 2018
     publisher: Indian Council of Medical Research
     reliability_score: 0.98
+    type_weight: 0.98
 
   "BTN_D1_Diabetes Management guidelines.pdf":
     source: Ministry of Health Bhutan
@@ -55,6 +61,7 @@ documents:
     year: 2007
     publisher: Ministry of Health Bhutan
     reliability_score: 0.92
+    type_weight: 0.91
 
   "DIA_Index_V2.pdf":
     source: NIDDK
@@ -63,6 +70,7 @@ documents:
     year: 2018
     publisher: National Institute of Diabetes and Digestive and Kidney Diseases
     reliability_score: 0.98
+    type_weight: 1.00
 
   "Textbook of Diabetes - Richard Holt.pdf":
     source: Wiley
@@ -71,3 +79,7 @@ documents:
     year: 2021
     publisher: Wiley Blackwell
     reliability_score: 0.99
+    type_weight: 0.96
+
+
+  

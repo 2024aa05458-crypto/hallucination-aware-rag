@@ -60,6 +60,8 @@ class ChunkGenerator:
 
                     "reliability_score": document["reliability_score"],
 
+                    "type_weight": document["type_weight"],
+
                     "chunk_number": index,
 
                     "character_count": len(chunk),
