@@ -16,10 +16,10 @@ embedding:
 
 vector_db:
   index_path: vector_db/diabetes_faiss.index
-  top_k: 3
+  top_k: 8
 
 llm:
-  model_name: google/flan-t5-small
+  model_name: google/flan-t5-base
   max_new_tokens: 150
   temperature: 0.2
 

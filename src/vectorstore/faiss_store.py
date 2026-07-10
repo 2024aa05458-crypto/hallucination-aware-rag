@@ -24,9 +24,12 @@ class FAISSVectorStore(BaseVectorStore):
 
         embeddings = np.array(embeddings).astype("float32")
 
+# Normalize embeddings for cosine similarity
+        faiss.normalize_L2(embeddings)
+
         dimension = embeddings.shape[1]
 
-        self.index = faiss.IndexFlatL2(dimension)
+        self.index = faiss.IndexFlatIP(dimension)
 
         self.index.add(embeddings)
 
@@ -60,9 +63,13 @@ class FAISSVectorStore(BaseVectorStore):
         top_k=3
     ):
 
-        distances, indices = self.index.search(
-            np.array([query_embedding]).astype("float32"),
+        query_embedding = np.array([query_embedding]).astype("float32")
+
+        faiss.normalize_L2(query_embedding)
+
+        scores, indices = self.index.search(
+            query_embedding,
             top_k
         )
 
-        return distances, indices
+        return scores, indices

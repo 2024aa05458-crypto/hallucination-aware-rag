@@ -1,4 +1,3 @@
-import numpy as np
 from sentence_transformers import SentenceTransformer
 
 from src.utils.common import load_yaml
@@ -36,27 +35,34 @@ class Retriever:
             convert_to_numpy=True
         )
 
-        distances, indices = self.vector_store.search(
+        similarities, indices = self.vector_store.search(
             query_embedding,
             self.top_k
         )
 
         retrieved_chunks = []
 
-        for rank, (distance, index) in enumerate(
-            zip(distances[0], indices[0]),
+        current_year = 2026
+
+        for rank, (similarity, index) in enumerate(
+            zip(similarities[0], indices[0]),
             start=1
         ):
 
             chunk = self.chunks[index]
 
-            semantic_score = 1 / (1 + float(distance))
+            semantic_score = float(similarity)
 
-            current_year = 2026
+            age = (
+                max(current_year - chunk["year"], 0)
+                if chunk["year"]
+                else 10
+            )
 
-            age = max(current_year - chunk["year"], 0) if chunk["year"] else 10
-
-            recency_score = max(0.70, 1 - (age * 0.02))
+            recency_score = max(
+                0.70,
+                1 - (age * 0.02)
+            )
 
             combined_score = (
                 semantic_score * 0.50
@@ -87,29 +93,27 @@ class Retriever:
 
                     "chunk": chunk["text"],
 
-                    "distance": float(distance),
+                    "similarity": round(float(similarity), 4),
+
+                    "semantic_score": round(semantic_score, 4),
+
+                    "reliability_score": chunk["reliability_score"],
 
                     "type_weight": chunk["type_weight"],
 
-                    "recency_score": round(recency_score,4),
+                    "recency_score": round(recency_score, 4),
 
-                    "semantic_score": round(
-                        semantic_score,
-                        4
-                    ),
-
-                    "reliability_score": chunk[
-                        "reliability_score"
-                    ],
-
-                    "combined_score": round(
-                        combined_score,
-                        4
-                    )
+                    "combined_score": round(combined_score, 4)
 
                 }
 
             )
+
+        retrieved_chunks = sorted(
+            retrieved_chunks,
+            key=lambda x: x["combined_score"],
+            reverse=True
+        )
 
         logger.info(
             f"Retrieved {len(retrieved_chunks)} chunks."
