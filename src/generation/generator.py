@@ -1,5 +1,7 @@
 import os
+import json
 import time
+import re
 
 from dotenv import load_dotenv
 from google import genai
@@ -34,6 +36,16 @@ class LLMGenerator:
 
         logger.info("Gemini Generator Initialized")
 
+    def clean_answer(self, answer):
+
+        answer = re.sub(
+            r"(?is)\n*\s*(sources?|references?|citations?)\s*:.*$",
+            "",
+            answer
+        )
+
+        return answer.strip()
+
     def generate(self, prompt):
 
         last_exception = None
@@ -48,24 +60,27 @@ class LLMGenerator:
 
                     model=model,
 
-                    contents=[
-                        {
-                            "role": "user",
-                            "parts": [
-                                {
-                                    "text": prompt
-                                }
-                            ]
-                        }
-                    ]
+                    contents=prompt
 
                 )
 
-                if response.text:
+                text = response.text.strip()
 
-                    logger.info(f"Success : {model}")
+                text = re.sub(
+                    r"```json|```",
+                    "",
+                    text
+                ).strip()
 
-                    return response.text.strip()
+                result = json.loads(text)
+
+                result["answer"] = self.clean_answer(
+                    result["answer"]
+                )
+
+                logger.info(f"Success : {model}")
+
+                return result
 
             except Exception as e:
 
@@ -76,5 +91,3 @@ class LLMGenerator:
                 time.sleep(2)
 
         raise last_exception
-
-        return "No response generated."

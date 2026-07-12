@@ -3,6 +3,8 @@ from src.generation.evidence_aggregator import EvidenceAggregator
 from src.generation.prompt_builder import PromptBuilder
 from src.generation.generator import LLMGenerator
 
+from src.confidence.confidence_calculator import ConfidenceCalculator
+
 
 class RAGPipeline:
 
@@ -16,6 +18,8 @@ class RAGPipeline:
 
         self.generator = LLMGenerator()
 
+        self.confidence = ConfidenceCalculator()
+
     def ask(self, question):
 
         retrieved = self.retriever.retrieve(question)
@@ -23,17 +27,38 @@ class RAGPipeline:
         evidence = self.aggregator.aggregate(retrieved)
 
         prompt = self.prompt_builder.build_prompt(
+
             question,
+
             evidence
+
         )
 
-        answer = self.generator.generate(prompt)
+        llm_response = self.generator.generate(prompt)
+
+        confidence = self.confidence.calculate(
+
+            evidence
+
+        )
 
         return {
 
             "question": question,
 
-            "answer": answer,
+            "answer": llm_response["answer"],
+
+            "verification": {
+
+                "hallucination_risk": llm_response["hallucination_risk"],
+
+                "evidence_coverage": llm_response["evidence_coverage"],
+
+                "reason": llm_response["reason"]
+
+            },
+
+            "confidence": confidence,
 
             "evidence": evidence
 

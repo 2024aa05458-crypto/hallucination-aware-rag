@@ -16,8 +16,6 @@ class PromptBuilder:
 
         context = ""
 
-        sources = []
-
         for item in evidence:
 
             context += f"""
@@ -34,48 +32,100 @@ Evidence
 
 """
 
-            sources.append(
-
-                f"{item['source']} - {item['title']}"
-
-            )
-
-        unique_sources = list(dict.fromkeys(sources))
-
-        source_text = "\n".join(unique_sources)
-
         prompt = f"""
 {self.system_prompt}
 
-You are answering using a trusted medical knowledge base.
+You are an expert medical AI assistant specialized in diabetes.
 
-Question
+You MUST answer ONLY using the retrieved medical evidence.
+
+Never use outside knowledge.
+
+--------------------------------------------------
+
+QUESTION
 
 {question}
 
-Medical Evidence
+--------------------------------------------------
+
+RETRIEVED MEDICAL EVIDENCE
 
 {context}
 
-Instructions
+--------------------------------------------------
 
-Write a natural answer in complete English.
+YOUR TASKS
 
-Do NOT copy the evidence.
+1. Read all retrieved evidence carefully.
 
-Combine information from all sources.
+2. Combine information from all relevant medical sources.
 
-Explain the answer as if speaking to a patient.
+3. Write a natural, fluent answer in complete English.
 
-If symptoms exist, explain them naturally.
+4. Explain the answer as if speaking to a patient.
 
-If treatment exists, explain it naturally.
+5. NEVER copy the evidence verbatim.
 
-End with:
+6. If symptoms are mentioned in the evidence,
+explicitly list them in natural language.
 
-Sources
+Example:
 
-{source_text}
+"Common symptoms include increased thirst, frequent urination,
+increased hunger, fatigue, blurred vision and unexplained weight loss."
+
+Do NOT simply write
+"classic symptoms".
+
+7. If diagnosis is mentioned,
+explain it naturally.
+
+8. If treatment is mentioned,
+explain it naturally.
+
+9. Verify that every statement in your answer is supported by the retrieved evidence.
+
+10. Estimate the percentage of your answer supported by the evidence.
+
+--------------------------------------------------
+
+IMPORTANT
+
+The answer field MUST contain ONLY the medical answer.
+
+DO NOT include
+
+- Sources
+- References
+- Citations
+- Evidence
+- Markdown
+- JSON explanation
+- Notes
+- Bullet saying "Sources"
+
+The frontend will display sources separately.
+
+--------------------------------------------------
+
+Return ONLY valid JSON.
+
+Do NOT use markdown.
+
+Do NOT use ```json.
+
+Return EXACTLY this format.
+
+{{
+    "answer":"Medical answer only",
+
+    "hallucination_risk":"Very Low",
+
+    "evidence_coverage":95,
+
+    "reason":"Short explanation."
+}}
 """
 
         return prompt

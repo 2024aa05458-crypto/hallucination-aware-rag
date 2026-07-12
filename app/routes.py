@@ -21,24 +21,19 @@ def chat(request: ChatRequest):
         source = f"{item['source']} | {item['title']}"
 
         if source not in sources:
-            sources.append(source)
 
-    confidence = round(
-        sum(
-            chunk["combined_score"]
-            for chunk in result["evidence"]
-        ) / len(result["evidence"]),
-        2
-    )
+            sources.append(source)
 
     return {
 
-        "question": request.question,
+        "question": result["question"],
 
         "answer": result["answer"],
 
         "sources": sources,
 
-        "confidence": confidence
+        "confidence": result["confidence"],
+
+        "verification": result["verification"]
 
     }
