@@ -1,100 +1,215 @@
+import ReactMarkdown from "react-markdown";
+
 import {
+
     Paper,
+
     Typography,
-    Chip,
+
     Box,
-    Divider
+
+    Chip,
+
+    Divider,
+
+    Stack
+
 } from "@mui/material";
+
+import VerifiedIcon from "@mui/icons-material/Verified";
+import SecurityIcon from "@mui/icons-material/Security";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import DescriptionIcon from "@mui/icons-material/Description";
 
 function ChatMessage({ message }) {
 
     const isUser = message.type === "user";
 
+    const confidence = message.confidence?.confidence;
+
+    const hallucination = message.verification?.hallucination_risk;
+
+    const coverage = message.verification?.evidence_coverage;
+
+    const reason = message.verification?.reason;
+
     return (
 
         <Box
+
             display="flex"
+
             justifyContent={isUser ? "flex-end" : "flex-start"}
-            mb={2}
+
+            mb={3}
+
         >
 
             <Paper
-                elevation={3}
+
+                elevation={4}
+
                 sx={{
-                    p: 2,
-                    maxWidth: "80%",
-                    bgcolor: isUser ? "#1976d2" : "#ffffff",
-                    color: isUser ? "#ffffff" : "#000000",
-                    borderRadius: 3
+
+                    p:3,
+
+                    borderRadius:4,
+
+                    width:isUser ? "70%" : "90%",
+
+                    bgcolor:isUser ? "#1976d2" : "#ffffff",
+
+                    color:isUser ? "#ffffff" : "#222"
+
                 }}
+
             >
 
                 <Typography
-                    variant="body1"
+
+                    variant="subtitle2"
+
                     sx={{
-                        whiteSpace: "pre-wrap"
+
+                        fontWeight:"bold",
+
+                        mb:1
+
                     }}
+
                 >
-                    {message.text}
+
+                    {isUser ? "👤 You" : "🤖 Diabetes Medical Assistant"}
+
                 </Typography>
+
+                <ReactMarkdown>
+
+                    {message.text}
+
+                </ReactMarkdown>
 
                 {
 
-                    !isUser && message.sources && (
+                    !isUser && (
 
                         <>
 
-                            <Divider sx={{ my: 2 }} />
+                            <Divider sx={{my:2}}/>
+
+                            <Stack
+
+                                direction="row"
+
+                                spacing={2}
+
+                                flexWrap="wrap"
+
+                            >
+
+                                <Chip
+
+                                    icon={<VerifiedIcon/>}
+
+                                    color="success"
+
+                                    label={`Confidence : ${confidence}%`}
+
+                                />
+
+                                <Chip
+
+                                    icon={<SecurityIcon/>}
+
+                                    color="primary"
+
+                                    label={`Hallucination : ${hallucination}`}
+
+                                />
+
+                                <Chip
+
+                                    icon={<AnalyticsIcon/>}
+
+                                    color="secondary"
+
+                                    label={`Coverage : ${coverage}%`}
+
+                                />
+
+                            </Stack>
 
                             <Typography
-                                variant="subtitle2"
-                                gutterBottom
+
+                                sx={{
+
+                                    mt:2,
+
+                                    fontWeight:"bold"
+
+                                }}
+
+                            >
+
+                                Verification
+
+                            </Typography>
+
+                            <Typography>
+
+                                {reason}
+
+                            </Typography>
+
+                            <Divider sx={{my:2}}/>
+
+                            <Typography
+
+                                sx={{
+
+                                    fontWeight:"bold",
+
+                                    mb:1
+
+                                }}
+
                             >
 
                                 Sources
 
                             </Typography>
 
-                            {
+                            <Stack
 
-                                message.sources.map(
+                                spacing={1}
 
-                                    (source, index) => (
+                            >
 
-                                        <Chip
+                                {
 
-                                            key={index}
+                                    message.sources?.map(
 
-                                            label={source}
+                                        (source,index)=>(
 
-                                            size="small"
+                                            <Chip
 
-                                            sx={{
-                                                mr: 1,
-                                                mb: 1
-                                            }}
+                                                key={index}
 
-                                        />
+                                                icon={<DescriptionIcon/>}
+
+                                                label={source}
+
+                                                variant="outlined"
+
+                                            />
+
+                                        )
 
                                     )
 
-                                )
+                                }
 
-                            }
-
-                            <Divider sx={{ my: 2 }} />
-
-                            <Typography
-                                variant="caption"
-                            >
-
-                                Confidence :
-
-                                {" "}
-
-                                {(message.confidence * 100).toFixed(0)}%
-
-                            </Typography>
+                            </Stack>
 
                         </>
 

@@ -50,7 +50,9 @@ function ChatBox() {
 
                 sources: response.sources,
 
-                confidence: response.confidence
+                confidence: response.confidence,
+
+                verification: response.verification
 
             };
 
@@ -195,6 +197,19 @@ function ChatBox() {
                 >
 
                     Send
+
+                </Button>
+                <Button
+
+                    variant="outlined"
+
+                    color="error"
+
+                    onClick={() => setMessages([])}
+
+                >
+
+                    New Chat
 
                 </Button>
 
