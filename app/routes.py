@@ -3,7 +3,6 @@ from fastapi import APIRouter
 from app.schemas import ChatRequest
 from src.pipeline.rag_pipeline import RAGPipeline
 
-
 router = APIRouter()
 
 rag = RAGPipeline()
@@ -34,6 +33,8 @@ def chat(request: ChatRequest):
 
         "confidence": result["confidence"],
 
-        "verification": result["verification"]
+        "verification": result["verification"],
+
+        "metrics": result["metrics"]
 
     }

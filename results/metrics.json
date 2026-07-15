@@ -1,0 +1,16 @@
+{
+    "questions": 30,
+    "average_confidence": 81.48,
+    "average_semantic_score": 0.705,
+    "average_reliability_score": 0.972,
+    "average_type_weight": 0.952,
+    "average_source_agreement": 0.675,
+    "average_evidence_coverage": 90.0,
+    "average_retrieval_time": 0.031,
+    "average_generation_time": 5.356,
+    "average_total_latency": 5.388,
+    "average_answer_length": 557.27,
+    "hallucination_distribution": {
+        "Very Low": 30
+    }
+}

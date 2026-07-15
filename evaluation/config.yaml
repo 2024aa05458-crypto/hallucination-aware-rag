@@ -1,0 +1,14 @@
+benchmark:
+  input_file: evaluation/benchmark_questions.csv
+
+output:
+  answers: results/answers.csv
+  metrics: results/metrics.json
+  report: results/evaluation_report.csv
+  response_times: results/response_times.csv
+
+evaluation:
+  iterations: 1
+  save_raw_answers: true
+  generate_report: true
+  generate_charts: true

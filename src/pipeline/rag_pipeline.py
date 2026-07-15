@@ -1,3 +1,5 @@
+import time
+
 from src.retrieval.retriever import Retriever
 from src.generation.evidence_aggregator import EvidenceAggregator
 from src.generation.prompt_builder import PromptBuilder
@@ -22,9 +24,27 @@ class RAGPipeline:
 
     def ask(self, question):
 
+        total_start = time.perf_counter()
+
+        retrieval_start = time.perf_counter()
+
         retrieved = self.retriever.retrieve(question)
 
-        evidence = self.aggregator.aggregate(retrieved)
+        retrieval_time = round(
+            time.perf_counter() - retrieval_start,
+            3
+        )
+
+        aggregation_start = time.perf_counter()
+
+        evidence = self.aggregator.aggregate(
+            retrieved
+        )
+
+        aggregation_time = round(
+            time.perf_counter() - aggregation_start,
+            3
+        )
 
         prompt = self.prompt_builder.build_prompt(
 
@@ -34,13 +54,61 @@ class RAGPipeline:
 
         )
 
-        llm_response = self.generator.generate(prompt)
+        generation_start = time.perf_counter()
+
+        llm_response = self.generator.generate(
+            prompt
+        )
+
+        generation_time = round(
+            time.perf_counter() - generation_start,
+            3
+        )
 
         confidence = self.confidence.calculate(
-
             evidence
+        )
+
+        total_latency = round(
+            time.perf_counter() - total_start,
+            3
+        )
+
+        unique_sources = len(
+
+            set(
+
+                f"{item['source']}|{item['title']}"
+
+                for item in evidence
+
+            )
 
         )
+
+        metrics = {
+
+            "retrieved_chunks": len(retrieved),
+
+            "evidence_chunks": len(evidence),
+
+            "unique_sources": unique_sources,
+
+            "answer_length": len(
+
+                llm_response["answer"]
+
+            ),
+
+            "retrieval_time": retrieval_time,
+
+            "aggregation_time": aggregation_time,
+
+            "generation_time": generation_time,
+
+            "total_latency": total_latency
+
+        }
 
         return {
 
@@ -50,16 +118,24 @@ class RAGPipeline:
 
             "verification": {
 
-                "hallucination_risk": llm_response["hallucination_risk"],
+                "hallucination_risk":
 
-                "evidence_coverage": llm_response["evidence_coverage"],
+                    llm_response["hallucination_risk"],
 
-                "reason": llm_response["reason"]
+                "evidence_coverage":
+
+                    llm_response["evidence_coverage"],
+
+                "reason":
+
+                    llm_response["reason"]
 
             },
 
             "confidence": confidence,
 
-            "evidence": evidence
+            "evidence": evidence,
+
+            "metrics": metrics
 
         }

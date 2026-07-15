@@ -1,0 +1,31 @@
+question,retrieval_time,generation_time,total_latency,overall_runtime
+What are the symptoms of Type 2 diabetes?,0.238,4.55,4.789,4.789
+What are the early symptoms of Type 2 diabetes?,0.02,3.466,3.487,3.487
+Can Type 2 diabetes develop without symptoms?,0.02,3.671,3.692,3.692
+Why do people with diabetes feel excessive thirst?,0.021,3.497,3.52,3.52
+Why does diabetes cause frequent urination?,0.022,3.396,3.418,3.418
+How is Type 2 diabetes diagnosed?,0.024,3.488,3.513,3.513
+What is HbA1c?,0.023,3.119,3.143,3.143
+What fasting blood glucose level indicates diabetes?,0.027,3.373,3.401,3.401
+What is the oral glucose tolerance test?,0.02,3.0,3.021,3.021
+When should adults be screened for Type 2 diabetes?,0.021,3.313,3.334,3.334
+How is Type 2 diabetes treated?,0.019,3.289,3.309,3.309
+What lifestyle changes help control Type 2 diabetes?,0.02,3.298,3.318,3.319
+When is insulin required for Type 2 diabetes?,0.026,60.247,60.274,60.274
+Can exercise reduce blood glucose levels?,0.019,3.731,3.75,3.75
+How does weight loss improve diabetes control?,0.016,3.229,3.246,3.246
+What are the major risk factors for Type 2 diabetes?,0.03,3.402,3.433,3.433
+Does obesity increase diabetes risk?,0.021,3.649,3.671,3.671
+Does family history increase diabetes risk?,0.019,3.151,3.17,3.17
+Can physical inactivity increase diabetes risk?,0.028,3.213,3.242,3.242
+Does increasing age increase diabetes risk?,0.024,3.337,3.361,3.361
+Can Type 2 diabetes be prevented?,0.019,3.403,3.423,3.423
+How does regular exercise help prevent diabetes?,0.04,3.466,3.507,3.507
+Can healthy eating reduce diabetes risk?,0.038,3.646,3.685,3.685
+What are the long-term complications of diabetes?,0.029,3.555,3.585,3.585
+How does diabetes affect the kidneys?,0.027,3.496,3.524,3.524
+How does diabetes affect the eyes?,0.022,3.678,3.7,3.7
+What diet is recommended for people with Type 2 diabetes?,0.022,3.469,3.492,3.492
+Is walking beneficial for people with diabetes?,0.023,3.314,3.337,3.337
+What is metformin used for in diabetes?,0.025,3.481,3.507,3.507
+When should a person with diabetes seek emergency medical care?,0.022,3.761,3.783,3.783
