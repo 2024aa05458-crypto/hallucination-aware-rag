@@ -39,7 +39,7 @@ jobs:
             python -c "import sentence_transformers"
             python -c "import google.genai"
 
-       - name: Verify FastAPI Entry Point
+      - name: Verify FastAPI Entry Point
         run: |
             python -m py_compile app/main.py
             python -m py_compile app/routes.py
