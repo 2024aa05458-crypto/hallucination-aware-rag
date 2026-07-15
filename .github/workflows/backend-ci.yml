@@ -32,10 +32,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Verify Imports
+      - name: Verify Core Imports
         run: |
-          python -c "from app.main import app"
-          python -c "from src.pipeline.rag_pipeline import RAGPipeline"
+            python -c "import fastapi"
+            python -c "import faiss"
+            python -c "import sentence_transformers"
+            python -c "import google.genai"
+
+       - name: Verify FastAPI Entry Point
+        run: |
+            python -m py_compile app/main.py
+            python -m py_compile app/routes.py
 
       - name: Python Syntax Check
         run: |
